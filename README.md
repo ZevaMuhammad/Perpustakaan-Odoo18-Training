@@ -1,4 +1,4 @@
-Perpustakaan - Odoo Library Management System (Training Project)
+# Perpustakaan - Odoo Library Management System (Training Project)
 Welcome to the Perpustakaan module, an Odoo library management system developed as a training project. This module serves as a comprehensive, hands-on exercise in Odoo development, covering key concepts like model definitions, view customizations, user access control, and business logic through custom methods. This repository is intended solely for personal training and learning purposes and is not intended for production use.
 
 Purpose
