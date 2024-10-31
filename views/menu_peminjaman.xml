@@ -1,0 +1,31 @@
+<odoo>
+    <record id="view_peminjaman_list" model="ir.ui.view">
+        <field name="name">peminjaman.list</field>
+        <field name="model">peminjaman</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="idp_buku"/>
+                <field name="idp_pengguna"/>
+                <field name="tanggal_peminjaman"/>
+                <field name="tanggal_pengembalian"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_peminjaman_form" model="ir.ui.view">
+        <field name="name">peminjaman.form</field>
+        <field name="model">peminjaman</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="idp_buku"/>
+                    <field name="idp_pengguna"/>
+                    <field name="tanggal_peminjaman"/>
+                    <field name="tanggal_pengembalian"/>
+                    <field name="status"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,99 @@
+<odoo>
+    <record id="view_data_buku_list" model="ir.ui.view">
+        <field name="name">data.buku.list</field>
+        <field name="model">data.buku</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="id_buku"/>
+                <field name="judul"/>
+                <field name="penerbit"/>
+                <field name="tanggal_terbit"/>
+                <field name="genre"/>
+                <field name="lokasi"/>
+                <field name="jumlah_copy"/>
+                <field name="deskripsi"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_data_buku_form" model="ir.ui.view">
+        <field name="name">data.buku.form</field>
+        <field name="model">data.buku</field>
+        <field name="arch" type="xml">
+            <form string="Data Buku">
+                <header>
+                    <button name="action_pinjam_buku" type="object" string="Pinjam" class="btn-primary"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,available,borrowed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="id_buku"/>
+                        <field name="judul" required="1"/>
+                        <field name="penerbit" required="1"/>
+                        <field name="tanggal_terbit" required="1"/>
+                        <field name="genre" required="1"/>
+                        <field name="lokasi" required="1"/>
+                        <field name="jumlah_copy" required="1"/>
+                        <field name="deskripsi"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_data_buku_search" model="ir.ui.view">
+        <field name="name">data.buku.search</field>
+        <field name="model">data.buku</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id_buku" string="Id Buku"/>
+                <field name="judul" string="Judul"/>
+                <field name="penerbit" string="Nama Penerbit"/>
+                <field name="tanggal_terbit" string="Tanggal Terbit"/>
+                <filter string="Fiksi" name="fiksi" domain="[('genre','=','fiksi')]"/>
+                <filter string="Non Fiksi" name="non_fiksi" domain="[('genre','=','non_fiksi')]"/>
+                <filter string="Edukasi" name="edukasi" domain="[('genre','=','edukasi')]"/>
+                <filter string="Buku Anak-anak" name="buku-anak-anak" domain="[('genre','=','buku-anak-anak')]"/>
+                <filter string="Biologi" name="biologi" domain="[('genre','=','biologi')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="unique_data_buku_action" model="ir.actions.act_window">
+        <field name="name">Data Buku</field>
+        <field name="res_model">data.buku</field>
+        <field name="view_mode">list,form,graph</field>
+        <field name="view_id" ref="view_data_buku_list"/>
+        <field name="search_view_id" ref="view_data_buku_search"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'form', 'view_id': ref('view_data_buku_form')})]"/>
+    </record>
+
+    <menuitem id="buku_menu_root" name="Aplikasi Buku">
+        <menuitem id="buku_master_data_menu" name="List Data">
+            <menuitem 
+                id="data_buku_menu_action" 
+                action="unique_data_buku_action"
+            />
+        </menuitem>
+    </menuitem>
+
+    <menuitem id="menu_perpustakaan_root" name="Perpustakaan" sequence="10"/>
+    
+    <menuitem id="menu_data_buku" name="Data Buku" parent="menu_perpustakaan_root" sequence="1"/>
+
+    <record id="action_data_buku" model="ir.actions.act_window">
+        <field name="name">Data Buku</field>
+        <field name="res_model">data.buku</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_data_buku_action" name="Manage Data Buku" action="action_data_buku" parent="menu_data_buku" sequence="1"/>
+
+    <record id="action_peminjaman" model="ir.actions.act_window">
+        <field name="name">Catatan Peminjaman</field>
+        <field name="res_model">peminjaman</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_peminjaman" name="Catatan Peminjaman" parent="menu_data_buku" action="action_peminjaman"/>
+</odoo>
